@@ -3,6 +3,13 @@ const server = express();
 
 server.use(express.json());
 
+server.use((req, res, next) => {
+  console.time('Request');
+  console.count('Request called');
+  next();
+  console.timeEnd('Request');
+});
+
 const projects = [{ id: "1", title: "Novo Projeto", tasks: [] }];
 
 function checkProjectId(req, res, next) {
